@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{%load static%}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<div class="card text-center bg-light">
+
+    <h2 class="text-success"> Hello, {{name}} </h2>
+
+</div>
+
+<br/>
+<br/>
+<div class="container bg-light font-weight-bold">
+
+    <p class="text-primary">Name : {{name}}</p>
+
+    <p class="text-primary">Email : {{email}}</p>
+
+    <p class="text-primary">Mobile no. : {{mobile}}</p>
+
+    <br/>
+    <br/>
+
+    <hr/>
+    <a class="btn btn-primary" href="profile_change" ><i class="fas fa-user-cog"></i> Change profile</a>
+    
+</div>
+<br/>
+
+
+
+
+<br/>
+
+
+
+
+{% endblock %}

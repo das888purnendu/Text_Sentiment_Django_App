@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{%load static%}
+
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+
+<div class="card text-center bg-light" style="background-image:url('{% static 'img/back.jpg' %}');background-repeat:no-repeat;background-position:center;background-size:cover;">
+    <div class="card-head">
+        <h1 class="text-primary">Welcome to the home page</h1>
+    </div>
+
+    <div class="card-body">
+        <h3 class="text-danger"><b>Today : {{time}}</b></h3></b>
+            <br/>
+            <br/>
+
+        <h2>Please register your details</h2>
+            <br/>
+            <hr class="hr"/>
+            <br/>
+        <a class="btn btn-primary" href="reg">Register</a>
+    </div>
+
+</div>
+{% endblock %}

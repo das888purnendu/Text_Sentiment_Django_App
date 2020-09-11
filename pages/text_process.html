@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{%load static%}
+
+{% block title %} Text Check {% endblock %}
+
+{% block content %}
+
+<div class="card text-center bg-light">
+
+    <h2 class="text-success"> Here you can check your text {{name}} </h2>
+
+</div>
+
+<br/>
+<br/>
+<p class="text-secondary"> Type something to check, sentence must be end with "." or "?" </p>
+<br/>
+
+<textarea id="text" oninput="check();" class="form-control border-success"></textarea>
+
+
+<br/>
+
+<div id="result" class="container bg-light" style="min-height:150px;"></div>
+
+
+
+<script>
+
+    clr_cls = ["<p class ='text-success' >","<p class ='text-danger' >","<p class ='text-primary'>"];
+    txt_sent = ["Positive","Negative","Neutral"];
+
+    
+    
+    function text_score(res,text_line)
+    {
+        if(res>0)
+        $("#result").append(clr_cls[0]+text_line+" -> "+txt_sent[0]);
+
+        else if (res==0)
+        $("#result").append(clr_cls[2]+text_line+" -> "+txt_sent[2]);
+
+        else
+        $("#result").append(clr_cls[1]+text_line+" -> "+txt_sent[1]);
+    }
+
+
+    function check()
+    {
+        var text = $("#text").val();
+        if(text.endsWith(".") || text.endsWith("!") || text.endsWith("?") )
+        {
+            $("#result").html("");
+            final_result = "";
+            var j ="";
+            for(var i=0; i<text.length;i++)
+            {
+                j+=text[i]
+                if(text[i]=="." || text[i]=="!" || text[i]=="?")
+                {
+                    if(j!="")
+                       {
+                           ajax_res(j);
+                       }
+                    j="";
+                }
+            }
+        }
+    }
+
+
+
+function ajax_res(text)
+{
+    var pol = 0;
+      $.ajax({
+        url: '/ajax_call',
+        type:'POST',
+        data: {
+          'text': text,
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+              pol = data["value"];
+              text_score(pol,text);
+          }
+        }
+      });
+}
+</script>
+
+
+
+{% endblock %}

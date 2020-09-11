@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{%load static%}
+
+{% block title %} Profile change {% endblock %}
+
+{% block content %}
+
+<div class="card text-center bg-light">
+
+    <h2 class="text-success"> Hello, {{name}} </h2>
+
+</div>
+
+<br/>
+<br/>
+<div class="container bg-light font-weight-bold">
+
+    <form method="POST" action="profile_change_form">
+
+    {% csrf_token %}
+
+    <p class="text-primary">Name :</p> 
+     <input type="text" minlength="4" maxlength="100" name="name" value="{{name}}" />
+
+    <br/><br/>
+    <p class="text-primary">Email : (Cann't be changed) </p> 
+    <input type="text"  name="mail" value="{{email}}" readonly />
+
+    <br/><br/>
+    <p class="text-primary">Mobile no. :</p> 
+    <input type="text" minlength="10" maxlength="10" name="mobile" value="{{mobile}}" />
+
+    <br/>
+    <br/>
+
+    <p class="text-primary">New password : (Leave blank for no change)</p> 
+    <input type="text" name="password" value="" />
+
+    <br/>
+    <br/>
+
+    <hr/>
+    <button class="btn btn-primary" type="submit" >Update </button>
+    
+    </form>
+
+</div>
+<br/>
+
+
+
+
+<br/>
+
+
+
+
+{% endblock %}

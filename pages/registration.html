@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block title %} Registration page {% endblock %}
+
+{% block content %}
+
+<h3 class="text-center text-muted">Registration Form</h3>
+
+
+
+<form action="/registration" class="container bg-light" style="width: 30rem;" method="post">
+
+{% csrf_token %}
+
+  {% if messages%}
+  <ul class="text-danger text-center">
+    {% for message in messages%}
+      <li> {{message}} </li>
+    {% endfor%}
+    </ul>
+  {% endif %}
+
+
+    <div class="form-group">
+        <label for="exampleInputName">Full Name</label>
+        <input type="text" required minlength="4" maxlength="50" name="name" class="form-control" id="exampleInputName"  placeholder="Enter your name">
+
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputMobile">Mobile</label>
+        <input type="tel" required minlength="10" maxlength="10" name="mobile" class="form-control" id="exampleInputMobile"  placeholder="Enter mobile number">
+
+      </div>
+
+
+    <div class="form-group">
+      <label for="exampleInputEmail">Email address</label>
+      <input type="email" required minlength="4" maxlength="50" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" required minlength="4" maxlength="20" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+
+    <div class="form-group">
+        <label for="exampleInputPassword2">Confrim Password</label>
+        <input type="password" minlength="4" maxlength="20" name="password_confirmation" required class="form-control" id="exampleInputPassword2" placeholder="Retype your password">
+    </div>
+
+    <br/>
+    <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+<br/>
+
+{% endblock %}
